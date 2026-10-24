@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Health Portal</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="nav"></div>
+  <main>
+    <div class="card" id="call-card" style="display:none">
+      <h2>Need help?</h2>
+      <button class="big-btn" id="call-btn">CALL NURSE</button>
+      <p class="muted" id="call-info"></p>
+    </div>
+    <div class="grid">
+      <div class="card"><h2>My details</h2><div id="profile"></div></div>
+      <div class="card">
+        <h2>Book an appointment</h2>
+        <form id="appt-form">
+          <label>Doctor</label><select name="doctor_id" id="appt-doctor" required></select>
+          <label>Date and time</label><input name="scheduled_at" type="datetime-local" required>
+          <label>Reason</label><input name="reason">
+          <p><button type="submit" class="green">Book</button></p>
+        </form>
+      </div>
+      <div class="card"><h2>My appointments</h2><div id="appointments"></div></div>
+      <div class="card"><h2>My prescriptions</h2><div id="prescriptions"></div></div>
+    </div>
+  </main>
+  <script src="js/common.js"></script>
+  <script src="js/patient.js"></script>
+</body>
+</html>

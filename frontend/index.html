@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ward Management System - Login</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="login-box">
+    <div class="card">
+      <h2>Ward Management System (IDH/NIID)</h2>
+      <form id="login-form">
+        <label>Email</label><input name="email" type="email" required>
+        <label>Password</label><input name="password" type="password" required>
+        <p><button type="submit">Log in</button></p>
+      </form>
+      <p class="muted">Demo accounts: admin@, doctor@, nurse@, patient@ward.local, password Password@123 (after running the seed script).</p>
+    </div>
+    <div class="card">
+      <h2>New patient? Register</h2>
+      <form id="register-form">
+        <label>Full name</label><input name="full_name" required>
+        <label>Email</label><input name="email" type="email" required>
+        <label>Password (min 8 characters)</label><input name="password" type="password" minlength="8" required>
+        <label>Date of birth</label><input name="date_of_birth" type="date">
+        <label>Phone</label><input name="phone">
+        <p><button type="submit" class="green">Register as patient</button></p>
+      </form>
+      <p class="muted">Doctors, nurses and admins are created by an administrator.</p>
+    </div>
+  </main>
+  <script src="js/common.js"></script>
+  <script src="js/login.js"></script>
+</body>
+</html>

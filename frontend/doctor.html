@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Doctor Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="nav"></div>
+  <main>
+    <div class="card"><h2>My appointments</h2><div id="appointments"></div></div>
+    <div class="grid">
+      <div class="card">
+        <h2>Patients</h2>
+        <input id="search" placeholder="Search by name or patient number">
+        <div id="patients" style="margin-top:10px"></div>
+      </div>
+      <div class="card">
+        <h2>Patient details</h2>
+        <div id="detail"><p class="muted">Select a patient.</p></div>
+      </div>
+      <div class="card">
+        <h2>Write a prescription</h2>
+        <form id="rx-form">
+          <label>Patient</label><select name="patient_id" id="rx-patient" required></select>
+          <label>Medicine (from inventory, optional)</label><select name="item_id" id="rx-item"></select>
+          <label>Medicine name</label><input name="medicine_name" id="rx-name" required>
+          <label>Dosage</label><input name="dosage" placeholder="e.g. 500 mg">
+          <label>Frequency</label><input name="frequency" placeholder="e.g. 3 times a day">
+          <label>Duration</label><input name="duration" placeholder="e.g. 5 days">
+          <p><button type="submit" class="green">Issue prescription</button></p>
+        </form>
+      </div>
+      <div class="card"><h2>My prescriptions</h2><div id="rx-list"></div></div>
+    </div>
+  </main>
+  <script src="js/common.js"></script>
+  <script src="js/doctor.js"></script>
+</body>
+</html>

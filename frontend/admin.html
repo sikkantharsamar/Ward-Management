@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="nav"></div>
+  <main>
+    <div class="card"><h2>Summary</h2><div id="summary" class="row"></div></div>
+    <div class="grid">
+      <div class="card">
+        <h2>Create user</h2>
+        <form id="user-form">
+          <label>Full name</label><input name="full_name" required>
+          <label>Email</label><input name="email" type="email" required>
+          <label>Password (min 8)</label><input name="password" type="password" minlength="8" required>
+          <label>Role</label>
+          <select name="role"><option value="doctor">Doctor</option><option value="nurse">Nurse</option><option value="admin">Admin</option><option value="patient">Patient</option></select>
+          <label>Specialization (doctors)</label><input name="specialization">
+          <label>Ward (nurses)</label><select name="ward_id" id="user-ward"></select>
+          <p><button type="submit" class="green">Create</button></p>
+        </form>
+      </div>
+      <div class="card">
+        <h2>Building, ward and bed setup</h2>
+        <form id="building-form" class="row"><input name="name" placeholder="New building name" required><button type="submit">Add building</button></form>
+        <form id="ward-form">
+          <label>Add ward</label>
+          <select name="building_id" id="ward-building" required></select>
+          <input name="name" placeholder="Ward name" required style="margin-top:6px">
+          <input name="ward_type" placeholder="Type (general, isolation, ICU)" style="margin-top:6px">
+          <p><button type="submit">Add ward</button></p>
+        </form>
+        <form id="bed-form">
+          <label>Add bed (a device key is generated)</label>
+          <select name="ward_id" id="bed-ward" required></select>
+          <input name="bed_number" placeholder="Bed number, e.g. A7" required style="margin-top:6px">
+          <p><button type="submit">Add bed</button></p>
+        </form>
+      </div>
+    </div>
+    <div class="card"><h2>Wards and beds (device keys are shown to admins only)</h2><div id="wards"></div></div>
+    <div class="card"><h2>Users</h2><div id="users"></div></div>
+    <div class="card">
+      <h2>Alert report (incident investigation)</h2>
+      <div class="row"><button id="csv-btn" class="green">Download CSV</button><span id="alert-stats" class="muted"></span></div>
+      <div id="alert-report" style="margin-top:10px"></div>
+    </div>
+    <div class="card"><h2>Audit log</h2><div id="audit"></div></div>
+  </main>
+  <script src="js/common.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

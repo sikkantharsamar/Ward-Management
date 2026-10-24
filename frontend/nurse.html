@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nurse Station</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="nav"></div>
+  <main>
+    <div class="card">
+      <div class="row"><h2 style="margin:0">Live emergency alerts</h2><span id="conn">connecting...</span>
+        <button class="small grey" id="sound-btn">Enable alarm sound</button></div>
+      <div id="alerts" style="margin-top:12px"></div>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <h2>Ward bed map</h2>
+        <select id="ward-select"></select>
+        <div id="beds" class="beds" style="margin-top:12px"></div>
+        <p class="muted">Green = available, blue = occupied, orange = alert acknowledged, red = active alert.</p>
+      </div>
+      <div class="card">
+        <h2>Admit a patient</h2>
+        <form id="admit-form">
+          <label>Patient</label><select name="patient_id" id="admit-patient" required></select>
+          <label>Bed (available beds in selected ward)</label><select name="bed_id" id="admit-bed" required></select>
+          <label>Doctor</label><select name="doctor_id" id="admit-doctor"></select>
+          <label>Diagnosis</label><input name="diagnosis">
+          <p><button type="submit" class="green">Admit</button></p>
+        </form>
+      </div>
+      <div class="card">
+        <h2>Low stock</h2>
+        <div id="low-stock"></div>
+      </div>
+      <div class="card">
+        <h2>Prescriptions to dispense</h2>
+        <div id="rx-list"></div>
+      </div>
+    </div>
+  </main>
+  <script src="js/common.js"></script>
+  <script src="js/nurse.js"></script>
+</body>
+</html>
