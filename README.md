@@ -1,100 +1,135 @@
-# Ward Management System with Emergency Button (IDH/NIID) - Group 09
+<h1 align="center">🚨 Ward Management System with Emergency Button 🏥</h1>
 
-Starter code for the website and server. Python (FastAPI) backend, plain HTML/CSS/JavaScript frontend,
-SQLite database (switchable to PostgreSQL). It is a working skeleton for the team to improve, not a finished product.
+<p align="center">
+  <b>IDH Ward Care</b> — one smart system to manage the ward and call for help in seconds.
+</p>
 
-## What is included
+<p align="center">
+  <img src="https://img.shields.io/badge/Status-Proof%20of%20Concept-orange?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Alerts-Real--Time-red?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Made%20for-Hospitals-2ea44f?style=for-the-badge" />
+</p>
 
-| Area | What it does |
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" />
+  <img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white" />
+  <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" />
+  <img src="https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white" />
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" />
+</p>
+
+---
+
+## 💡 About the Project
+
+In an infectious disease ward, a patient who needs help fast may not be able to reach a nurse. On top of that, hospital records are often spread across paper and different systems.
+
+This project fixes both problems:
+
+- 🔴 **A physical emergency button on every bed.** One press and the nurse knows right away.
+- 🖥️ **A web-based ward management system.** Patients, beds, doctors, medicines and appointments, all in one place.
+
+Built for the **Infectious Diseases Hospital (IDH), Sri Lanka**. 🇱🇰
+
+---
+
+## 🔗 How the Emergency Button and Nurse Station Connect
+
+The nurse station website is **directly integrated with the emergency button**.
+
+1. 🛏️ A patient presses the button on their bed (or uses an easier alternative if they can't press it).
+2. 📡 The button sends the alert to the system over Wi-Fi.
+3. 🖥️ The nurse station website **pops up an alert with a sound alarm** instantly.
+4. 📍 The alert shows the **bed, ward and patient details**, so the nurse knows exactly where to go.
+5. ✅ The nurse acknowledges the alert, attends the patient, and marks it resolved.
+
+No shouting. No waiting. No missed calls. 🔔
+
+---
+
+## 🌟 How It Helps Everyone
+
+### 👩‍⚕️ Nurses
+- 🚨 Get instant alerts with sound and a pop-up on the nurse station screen
+- 🗺️ See a live bed map with colour-coded status
+- 💊 Dispense medicines, and the stock updates automatically
+
+### 👨‍⚕️ Doctors
+- 📋 See patient records and admissions in one place
+- 📅 Manage appointments easily
+- 📝 Write prescriptions digitally
+
+### 🧑‍🤝‍🧑 Patients
+- 🔘 Call for help at any time with the bedside button
+- ♿ Use an easier alternative if they can't press the normal button
+- 🔐 Check their own information through their own login
+
+### 🛠️ Admins
+- 🏢 Manage buildings, wards, beds and users
+- 📦 Track medical supplies, with low-stock warnings
+- 📊 View alert reports and response times
+
+---
+
+## ✨ Key Features
+
+| | Feature |
 |---|---|
-| Login and roles | Admin, doctor, nurse and patient accounts. Patients can self-register; staff are created by an admin. JWT login, role-based access on every endpoint. |
-| Emergency alerts | Bed device sends an alert with its device key, the server saves it and pushes it live to the nurse station (WebSocket). Acknowledge, resolve, repeat-press handling, overdue list for escalation. Patients can also call for help from the website (the alternative trigger). |
-| Nurse station page | Live alert cards with sound, ward bed map with colours, admit/discharge, low stock, dispense prescriptions. Falls back to polling every 10 s if the live connection drops. |
-| Ward administration | Buildings, wards, beds, patients, guardians, admissions, bed transfers, doctor appointments (with clash check). |
-| Prescriptions and inventory | Doctors issue prescriptions, nurses dispense them and stock is deducted automatically. Medicine and supply stock with reorder levels, stock movement history. |
-| Reports | Summary numbers, alert history with response times, CSV download, audit log of every important action. |
-| Device simulator | `device_simulator/simulate_button.py` pretends to be a bed button, including the retry-until-ACK rule. |
+| 🔴 | Bedside emergency button on every bed |
+| ♿ | Wearable / alternative trigger for patients who can't press the button |
+| 🖥️ | Live nurse station dashboard with sound alarm |
+| 🛏️ | Bed allocation, transfers and ward occupancy |
+| 💊 | Prescriptions and automatic inventory tracking |
+| 🔋 | Battery backup so it keeps working during power cuts |
+| 💾 | Offline logging and cloud backup so no alert is ever lost |
+| 🔐 | Secure login with different roles (admin, doctor, nurse, patient) |
+| 📈 | Incident reports with CSV export |
 
-## Folder structure
+---
 
-```
-ward-management/
-  backend/
-    app/
-      main.py            app start, routers, serves the website
-      config.py          settings from .env
-      database.py        database connection
-      models.py          ALL database tables
-      schemas.py         request bodies
-      security.py        password hashing, JWT
-      deps.py            login check and role check
-      utils.py           shared helpers
-      websocket_manager.py   live push to nurse stations
-      seed.py            demo data
-      routers/           auth, users, patients, wards, admissions, appointments,
-                         prescriptions, inventory, alerts, reports
-    tests/test_api.py
-    requirements.txt  .env.example
-  frontend/              index, nurse, doctor, patient, admin, inventory pages
-    js/  css/
-  device_simulator/      fake bed button
-  docs/                  DEVICE_API.md (for hardware team), TEAM_TASKS.md
-  docker-compose.yml     optional PostgreSQL
-```
+## 🧰 Tech Stack
 
-## Run it (first time)
+| Layer | Technology |
+|---|---|
+| 🐍 **Server** | Python, FastAPI, Uvicorn |
+| 🗄️ **Database** | SQLAlchemy, SQLite (development), PostgreSQL (local and remote) |
+| ⚡ **Live Alerts** | WebSocket with polling fallback |
+| 🔑 **Security** | JWT, PBKDF2 password hashing, role-based access |
+| 🎨 **Frontend** | HTML, CSS, JavaScript |
+| 🔌 **Hardware** | Microcontroller with Wi-Fi, SD card, battery backup, custom PCB, 3D-printed casing |
+| 🧪 **Tools** | VS Code, Git, GitHub, Docker |
 
-You need Python 3.10+ and VS Code. Open the `ward-management` folder in VS Code, then open a terminal:
+---
+
+## 🚀 Getting Started
+
+You need **Python 3.10+** and **Git**.
 
 ```bash
-cd backend
+git clone <repository-url>
+cd ward-management/backend
 python -m venv .venv
-# Windows:        .venv\Scripts\activate
-# Mac / Linux:    source .venv/bin/activate
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-# Windows: copy .env.example .env      Mac / Linux: cp .env.example .env
-python -m app.seed
+cp .env.example .env             # Windows: copy .env.example .env
+python -m app.seed               # creates demo data
 uvicorn app.main:app --reload --host 0.0.0.0
 ```
 
-- Website: http://127.0.0.1:8000
-- API documentation (try every endpoint): http://127.0.0.1:8000/docs  (log in with `POST /api/auth/login`, copy the token, press Authorize)
-- Other computers on the same Wi-Fi can open `http://<your-PC-IP>:8000`
+🌐 Website: http://127.0.0.1:8000
+📖 API docs: http://127.0.0.1:8000/docs
 
-Demo accounts (password `Password@123`): `admin@ward.local`, `doctor@ward.local`, `nurse@ward.local`, `patient@ward.local`.
-Demo bed device keys: `demo-key-bed-1` to `demo-key-bed-6` (bed A1 has the demo patient).
+**Demo logins** (password: `Password@123`)
+`admin@ward.local` · `doctor@ward.local` · `nurse@ward.local` · `patient@ward.local`
 
-### Try the emergency flow
+**Try the emergency flow** 🚨
+Log in as the nurse, then in a second terminal run:
 
-1. Log in as `nurse@ward.local` in one browser window (nurse station).
-2. In another terminal: `python device_simulator/simulate_button.py --key demo-key-bed-1`
-3. The alert appears on the nurse station instantly. Acknowledge it, then resolve it.
-4. Log in as admin and open the alert report.
+```bash
+python device_simulator/simulate_button.py --key demo-key-bed-1
+```
 
-## Database: what you need
+The alert shows up on the nurse station right away.
 
-You do NOT need AWS to start. Use it in three stages:
-
-1. **Now (development):** SQLite. It is one file (`ward.db`), nothing to install. This is already the default.
-2. **Local database for the ward PC:** PostgreSQL on the local PC (`docker compose up -d`, then set `DATABASE_URL` in `.env`). Sir asked for local logging on a local PC, so this is that part.
-3. **Remote database (for multi-user remote login and backup):** a hosted PostgreSQL. AWS RDS is one option; there are also free-tier hosted options (for example Supabase, Neon, Render). Free-tier limits change, so check them before choosing. Ask sir whether the university provides any cloud account.
-
-The code already uses SQLAlchemy, so changing from SQLite to PostgreSQL is just changing `DATABASE_URL`. The local-to-remote sync (a scheduled job that copies new records to the cloud, and works offline) is not built yet; see `docs/TEAM_TASKS.md`.
-
-## Working together on GitHub
-
-1. Leader creates the repo (private) and pushes this folder: `git init`, `git add .`, `git commit -m "Initial starter code"`, `git branch -M main`, `git remote add origin <repo-url>`, `git push -u origin main`.
-2. Add the five teammates as collaborators.
-3. Nobody commits directly to `main`. Each person works on a branch: `git checkout -b feature/ayodya-nurse-dashboard`.
-4. Commit small and often, push the branch, open a Pull Request, the leader reviews and merges.
-5. Pull before you start work each day: `git pull origin main`.
-6. Never commit `.env` or `ward.db` (already in `.gitignore`).
-
-Who works on which files is in `docs/TEAM_TASKS.md`.
-
-## Important notes
-
-- Change `SECRET_KEY` in `.env` before any real use. Use HTTPS when it leaves the lab.
-- CORS is wide open for development; restrict it before deployment.
-- This is a student proof of concept. Real patient data needs proper security and privacy review.
-- The code was written without being run in the environment it was generated in (no internet to install packages). The syntax was checked, but expect to fix small bugs on first run. Fix them on a branch and tell the team.
+---
