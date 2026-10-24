@@ -54,9 +54,11 @@ select:focus-visible, textarea:focus-visible {
   gap: 18px;
   min-height: 64px;
   padding: 12px 24px;
-  background: var(--navy);
-  color: var(--white);
-  box-shadow: 0 2px 8px rgba(0, 18, 41, 0.18);
+  color: var(--navy);
+  background: rgba(255,255,255,.95);
+  border-bottom: 1px solid var(--surface-container);
+  box-shadow: 0 1px 8px rgba(15,39,68,.06);
+  backdrop-filter: blur(12px);
   position: sticky;
   top: 0;
   z-index: 10;
@@ -66,12 +68,13 @@ select:focus-visible, textarea:focus-visible {
 #nav .brand {
   font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 700;
+  color: var(--navy);
   font-size: 18px;
   letter-spacing: -0.01em;
   white-space: nowrap;
 }
 #nav a {
-  color: #dbeafe;
+  color: var(--muted);
   text-decoration: none;
   font-size: 14px;
   font-weight: 600;
@@ -79,16 +82,46 @@ select:focus-visible, textarea:focus-visible {
   border-bottom: 2px solid transparent;
 }
 #nav a:hover, #nav a:focus-visible {
-  color: var(--white);
+  color: var(--blue);
   border-bottom-color: #60a5fa;
 }
-#nav > span:not(.brand):not(.grow) { font-size: 13px; color: #dbeafe; }
+#nav > span:not(.brand):not(.grow) { font-size: 13px; color: var(--muted); }
+
+.clinical-sidebar {
+  position: fixed;
+  top: 64px;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  width: 232px;
+  padding: 28px 16px;
+  background: var(--white);
+  border-right: 1px solid var(--surface-container);
+}
+.clinical-sidebar p { margin: 0 12px 12px; }
+.clinical-sidebar a {
+  display: block;
+  padding: 11px 12px;
+  color: var(--muted);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.clinical-sidebar a:hover, .clinical-sidebar a:focus-visible,
+.clinical-sidebar a.active {
+  color: var(--blue);
+  background: var(--surface-low);
+  border-bottom: 0;
+}
+.clinical-sidebar .critical-link { color: var(--red); }
 
 main {
   max-width: 1240px;
   margin: 0 auto;
   padding: 32px 24px 48px;
 }
+.clinical-sidebar ~ main { margin-left: 232px; padding-top: 96px; }
 
 .card {
   background: var(--white);
@@ -280,7 +313,9 @@ tr:hover td { background: #f8fbff; }
   #nav { gap: 10px; padding: 12px 16px; flex-wrap: wrap; }
   #nav .grow { display: none; }
   #nav > span:not(.brand):not(.grow) { margin-left: auto; }
-  main { padding: 24px 16px 40px; }
+  .clinical-sidebar { display: none; }
+  main { margin-left: 0; padding: 24px 16px 40px; }
+  .clinical-sidebar ~ main { margin-left: 0; padding-top: 88px; }
   .card { padding: 18px; margin-bottom: 16px; }
   .grid { gap: 16px; grid-template-columns: 1fr; }
   .login-box { margin: 24px auto; }

@@ -44,7 +44,15 @@ async function loadAlerts() {
   try {
     const alerts = await api("/alerts?status=open");
     const box = document.getElementById("alerts");
-    if (!alerts.length) { box.innerHTML = '<p class="muted">No active alerts.</p>'; return; }
+    const alertCount = document.getElementById("stat-alerts");
+    if (alertCount) alertCount.textContent = alerts.length;
+    const alertPanel = box.closest(".alert-panel");
+    if (!alerts.length) {
+      box.innerHTML = '<p class="muted">No active alerts. Continue routine safety checks.</p>';
+      if (alertPanel) alertPanel.classList.add("empty");
+      return;
+    }
+    if (alertPanel) alertPanel.classList.remove("empty");
     box.innerHTML = alerts.map(a => `
       <div class="alert-card ${a.status === "active" ? "flash" : "acknowledged"}">
         <b>${esc(a.building_name)} / ${esc(a.ward_name)} / Bed ${esc(a.bed_number)}</b>
@@ -83,6 +91,15 @@ async function loadBeds() {
   if (!currentWard) return;
   try {
     const beds = await api("/wards/" + currentWard + "/beds");
+    const occupied = beds.filter(b => b.status === "occupied").length;
+    const available = beds.filter(b => b.status === "available").length;
+    const patients = beds.filter(b => b.patient_name).length;
+    const occupiedCount = document.getElementById("stat-occupied");
+    const availableCount = document.getElementById("stat-available");
+    const patientCount = document.getElementById("stat-patients");
+    if (occupiedCount) occupiedCount.textContent = occupied;
+    if (availableCount) availableCount.textContent = available;
+    if (patientCount) patientCount.textContent = patients;
     document.getElementById("beds").innerHTML = beds.map(b => {
       let cls = b.status;
       if (b.alert_status === "active") cls = "alert-active";

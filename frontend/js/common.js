@@ -69,6 +69,18 @@ function renderNav(user) {
   nav.innerHTML = '<span class="brand">Ward Management</span>' + links +
     '<span class="grow"></span><span>' + esc(user.full_name) + " (" + esc(user.role) + ')</span>' +
     '<button class="small grey" onclick="logout()">Logout</button>';
+  const sidebarLinks = user.role === "patient"
+    ? '<a class="active" href="patient.html">Patient portal</a><a href="#appt-form">Appointments</a><a href="#prescriptions">Medications</a><a class="critical-link" href="#call-card">Request assistance</a>'
+    : user.role === "doctor"
+      ? '<a class="active" href="doctor.html">Doctor dashboard</a><a href="#appointments">Appointments</a><a href="#patients">Patient roster</a><a href="#rx-form">Prescriptions</a><a href="inventory.html">Inventory &amp; pharmacy</a>'
+      : user.role === "admin"
+        ? '<a class="active" href="admin.html">Admin dashboard</a><a href="#summary">Operations summary</a><a href="#users">Staff &amp; access</a><a href="#alert-report">Alert reports</a><a href="inventory.html">Inventory &amp; pharmacy</a>'
+        : '<a class="active" href="nurse.html">Nurse station</a><a href="#alerts-title">Safety alerts</a><a href="#beds-title">Ward census</a><a href="inventory.html">Inventory &amp; pharmacy</a><a class="critical-link" href="#alerts-title">Emergency protocols</a>';
+  const sidebar = document.createElement("aside");
+  sidebar.className = "clinical-sidebar";
+  sidebar.setAttribute("aria-label", "Clinical navigation");
+  sidebar.innerHTML = '<p class="eyebrow">Clinical navigation</p>' + sidebarLinks;
+  document.body.prepend(sidebar);
 }
 
 function option(value, label) { return '<option value="' + esc(value) + '">' + esc(label) + "</option>"; }
